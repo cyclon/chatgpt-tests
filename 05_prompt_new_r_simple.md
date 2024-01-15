@@ -12,7 +12,6 @@ make the function dynamic with non-standard evaluation.
 
 # Response
 
-ChatGPT
 Certainly! The R function I'll write will calculate the Mean Absolute Percentage Error (MAPE), Root Mean Squared Error (RMSE), and Total Sum of Squares (TSS) for a given data frame. This function will use tidyverse conventions and the latest R native pipe (|>).
 
 To accept column names using Non-Standard Evaluation (NSE), I will utilize {{}} from rlang. This allows you to pass unquoted column names directly to the function.
