@@ -1,56 +1,35 @@
 # Input
 
-For this test, I wrote the following R script and asked Claude to translate this
-into Python. This code uses common R packages, is formatted with good style
-convention, and produces a verified output. I provided the following prompt:
+For this test, I wrote the following R script and asked Claude to identify bugs
+in the code. Specifically, I referenced a column which did not exist in my data
+and used the `sum()` function where `mean()` was more appropriate.
 
-**Please translate this into Python using good style and common packages:**
+**Please help me find bugs in this R code. I am getting an error about a**
+**column. Also, the aggregated column called result is far too large. When you**
+**find the bugs, rewrite the code with corrections and annotations.**
 
 ```R
 #### Setup ####
 
-# model_tests.R
+# summary_stats.R
 # Chris Walker
 
-# Fits a series of linear models at varying proportions
+# Computes some summary statistics over some data
 
 library(dplyr)
-library(readr)
-library(purrr)
-library(withr)
-library(rsample)
+library(tibble)
 
 data <-
-  readr::read_csv(
-    here::here("data/data.csv")
+  tibble::tibble(
+    x = runif(1000),
+    y = rnorm(1000)
   )
 
-init_split <- rsample::initial_split(train)
-train <- rsample::training(init_split)
-test <- rsample::testing(init_split)
-
-#### Fit Models ####
-
-models <-
-  seq(0.5, 1.0, 0.1) |>
-  purrr::map(function(sample) {
-  
-    train |>
-      dplyr::slice_sample(
-        prop = sample
-      ) |>
-      withr::with_seed(
-        seed = 123
-      ) |>
-      lm(y ~ .)
-  
-  })
-  
-#### Save to Disk ####
-  
-models |>
-  readr::write_rds(
-    here::here("data/model_fits.Rds")
+data |>
+  dplyr::group_by(z) |>
+  dplyr::summarize(
+    mean_x_y = sum(x * y),
+    sum_x_y = sum(x * y)
   )
 
 ```
