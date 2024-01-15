@@ -1,3 +1,33 @@
+# Input
+
+For this test, I wrote the following Python and asked Claude to identify bugs
+in the code. Specifically, I referenced functions which did not exist in Pandas
+and referenced functions not yet imported.
+
+**Please help me find bugs in this Python code. I am getting an error about a**
+**function not defined. When you find the bugs, rewrite the code with**
+**corrections and annotations.**
+
+```python
+#### Setup ####
+
+# summary_stats.R
+# Chris Walker
+
+# Computes some summary statistics over some data
+
+import pandas as pd
+
+data = pd.dataframe(
+  x = random.uniform(1000),
+  y = random.normal(1000)
+)
+
+data.group_by("z").agg({
+  "mean_x_y": lambda x: sum(x.x * x.y)
+})
+```
+
 # Response 
 
 ChatGPT
