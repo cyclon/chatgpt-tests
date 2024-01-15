@@ -1,3 +1,60 @@
+# Input
+
+For this test, I wrote the following R script and asked Claude to translate this
+into Python. This code uses common R packages, is formatted with good style
+convention, and produces a verified output. I provided the following prompt:
+
+**Please translate this into Python using good style and common packages:**
+
+```R
+#### Setup ####
+
+# model_tests.R
+# Chris Walker
+
+# Fits a series of linear models at varying proportions
+
+library(dplyr)
+library(readr)
+library(purrr)
+library(withr)
+library(rsample)
+
+data <-
+  readr::read_csv(
+    here::here("data/data.csv")
+  )
+
+init_split <- rsample::initial_split(train)
+train <- rsample::training(init_split)
+test <- rsample::testing(init_split)
+
+#### Fit Models ####
+
+models <-
+  seq(0.5, 1.0, 0.1) |>
+  purrr::map(function(sample) {
+  
+    train |>
+      dplyr::slice_sample(
+        prop = sample
+      ) |>
+      withr::with_seed(
+        seed = 123
+      ) |>
+      lm(y ~ .)
+  
+  })
+  
+#### Save to Disk ####
+  
+models |>
+  readr::write_rds(
+    here::here("data/model_fits.Rds")
+  )
+
+```
+
 # Response
 
 ChatGPT
