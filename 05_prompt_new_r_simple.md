@@ -1,3 +1,15 @@
+# Input
+
+For this test, I asked Claude to develop an R function which accepts a data
+frame of model predictions and true responses. From there, we need to compute
+RMSE, MAPE, and total sum of squares. I also asked it to use the tidyverse and
+make the function dynamic with non-standard evaluation.
+
+**Please write an R function which accepts a data frame as the first argument.**
+**This function needs to consider actual and predicted values and find MAPE,**
+**RMSE, and total sum of squares. Use the tidyverse, R namespaces, and the new**
+**R pipe `|>`. Make it so we can pass column names using NSE with `{{}}`.**
+
 # Response
 
 ChatGPT
