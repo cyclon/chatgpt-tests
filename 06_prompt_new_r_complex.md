@@ -1,3 +1,13 @@
+# Input
+
+Here I asked Claude to do something more complex. Specifically, I asked Claude
+to pull data from the BLS and construct a model which relates interest rates
+to unemployment. This is a very complex task which requires good programming
+practice, an understanding of the domain, and use of many packages.
+
+**Write an R script which pulls data from the BLS and models interest rates**
+**and unemployment using the tidyverse.**
+
 # Response
 
 ChatGPT
